@@ -32,6 +32,7 @@ class TodoApp extends React.Component {
           </button>
         </form>
         <TodoList items={this.state.items} />
+        <TodoDetail/>
         Source: <a
           className="App-link"
           href="https://github.com/kaicarver/todo"
@@ -77,7 +78,7 @@ class TodoList extends React.Component {
 
 class TodoItem extends React.Component {
   handleClick(items, count) {
-    alert(`heyy item ${count + 1} ${items[count].id}`)
+    document.getElementById("detail").innerText = `heyy item ${count + 1} ${items[count].id}`;
     items.push({
       text: 'Click!',
       id: Date.now()
@@ -91,5 +92,15 @@ class TodoItem extends React.Component {
     );
   }
 }
+
+class TodoDetail extends React.Component {
+  render() {
+
+    return (
+      <div id="detail">...</div>
+    );
+  }
+}
+
 
 export default TodoApp;
