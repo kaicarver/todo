@@ -69,7 +69,7 @@ class TodoList extends React.Component {
     return (
       <ul>
         {this.props.items.map((item, i) => (
-          <TodoItem count={i} items={this.props.items} />
+          <TodoItem key={item.id} count={i} items={this.props.items} />
         ))}
       </ul>
     );
@@ -78,7 +78,8 @@ class TodoList extends React.Component {
 
 class TodoItem extends React.Component {
   handleClick(items, count) {
-    document.getElementById("detail").innerText = `heyy item ${count + 1} ${items[count].id}`;
+    document.getElementById("detailtext").innerText = `heyy item ${count + 1} ${items[count].id}`;
+    // BUG: this is insufficiently reactive
     items.push({
       text: 'Click!',
       id: Date.now()
@@ -88,19 +89,23 @@ class TodoItem extends React.Component {
     let count = this.props.count;
     let item = this.props.items[count];
     return (
-      <li onClick={() => this.handleClick(this.props.items, count)} key={item.id}><span>{count + 1}.</span> {item.text}</li>
+      <li
+        onClick={() => this.handleClick(this.props.items, count)}>
+        <span>{count + 1}.</span>
+        {item.text}
+      </li>
     );
   }
 }
 
-class TodoDetail extends React.Component {
-  render() {
-
-    return (
-      <div id="detail">...</div>
-    );
-  }
+function TodoDetail() {
+  // BUG: the Delete button should only display when there is some detail
+  return (
+    <div id="detail">
+      <div id="detailtext">...</div>
+      <button>Delete</button>
+    </div>
+  );
 }
-
 
 export default TodoApp;
