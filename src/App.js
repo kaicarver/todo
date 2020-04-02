@@ -15,7 +15,7 @@ class TodoApp extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="App">
         <h3>TODO List</h3>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="new-todo">
