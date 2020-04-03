@@ -33,6 +33,7 @@ class TodoApp extends React.Component {
         </form>
         <TodoList items={this.state.items} />
         <TodoDetail/>
+        <div>Just a random toggle: <Toggle/></div>
         Source: <a
           className="App-link"
           href="https://github.com/kaicarver/todo"
@@ -91,8 +92,7 @@ class TodoItem extends React.Component {
     return (
       <li
         onClick={() => this.handleClick(this.props.items, count)}>
-        <span>{count + 1}.</span>
-        {item.text}
+        <span>{count + 1}.</span> {item.text}
       </li>
     );
   }
@@ -106,6 +106,27 @@ function TodoDetail() {
       <button>Delete</button>
     </div>
   );
+}
+
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState(state => ({
+      isToggleOn: !state.isToggleOn
+    }));
+  }
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? 'ON' : 'OFF'}
+      </button>
+    );
+  }
 }
 
 export default TodoApp;
