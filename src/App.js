@@ -33,7 +33,8 @@ class TodoApp extends React.Component {
         </form>
         <TodoList items={this.state.items} />
         <TodoDetail/>
-        <div>Just a random toggle: <Toggle/></div>
+        <div>Just a random toggle: <ToggleButton/></div>
+        <div>Just a log button: <LoggingButton/></div>
         Source: <a
           className="App-link"
           href="https://github.com/kaicarver/todo"
@@ -108,7 +109,7 @@ function TodoDetail() {
   );
 }
 
-class Toggle extends React.Component {
+class ToggleButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {isToggleOn: true};
@@ -124,6 +125,21 @@ class Toggle extends React.Component {
     return (
       <button onClick={this.handleClick}>
         {this.state.isToggleOn ? 'ON' : 'OFF'}
+      </button>
+    );
+  }
+}
+
+class LoggingButton extends React.Component {
+  // This syntax ensures `this` is bound within handleClick.
+  // Warning: this is *experimental* syntax.
+  handleClick = () => {
+    console.log('this is:', this);
+  }
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        Click me
       </button>
     );
   }
