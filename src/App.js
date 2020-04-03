@@ -34,7 +34,7 @@ class TodoApp extends React.Component {
         <TodoList items={this.state.items} />
         <TodoDetail/>
         <div>Just a random toggle: <ToggleButton/></div>
-        <div>Just a log button: <LoggingButton/></div>
+        <div>And another: <ToggleButton2/></div>
         Source: <a
           className="App-link"
           href="https://github.com/kaicarver/todo"
@@ -130,16 +130,23 @@ class ToggleButton extends React.Component {
   }
 }
 
-class LoggingButton extends React.Component {
+class ToggleButton2 extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+  }
   // This syntax ensures `this` is bound within handleClick.
   // Warning: this is *experimental* syntax.
   handleClick = () => {
+    this.setState(state => ({
+      isToggleOn: !state.isToggleOn
+    }));
     console.log('this is:', this);
   }
   render() {
     return (
       <button onClick={this.handleClick}>
-        Click me
+        {this.state.isToggleOn ? 'ON' : 'OFF'}
       </button>
     );
   }
